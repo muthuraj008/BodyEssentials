@@ -17,10 +17,16 @@ namespace WebApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProductById(string id)
         {
             return Ok(await _mediator.Send(new Details.Query { Id = Guid.Parse(id) }));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<Product>>> GetAllProducts()
+        {
+            return Ok(await _mediator.Send(new List.Query()));
         }
     }
 }

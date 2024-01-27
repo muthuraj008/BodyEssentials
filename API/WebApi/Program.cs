@@ -19,6 +19,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseSqlServer(conf.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddCors();
 builder.Services.AddIdentityCore<AppUser>(opt =>
 {
     opt.Password.RequireNonAlphanumeric = true;
@@ -33,6 +34,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+});
 
 app.UseHttpsRedirection();
 

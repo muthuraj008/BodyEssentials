@@ -28,5 +28,11 @@ namespace WebApi.Controllers
         {
             return Ok(await _mediator.Send(new List.Query()));
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<List<Product>>> DeleteProduct()
+        {
+            return Ok();
+        }
     }
 }
